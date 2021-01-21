@@ -18,8 +18,13 @@ public class LockedState extends State{
     }
 
     @Override
-    public String onPLay() {
-        return null;
+    public String onPlay() {
+        if (player.isPlaying()) {
+            player.changeState(new ReadyState(player));
+            return "Stop playing";
+        } else {
+            return "Locked...";
+        }
     }
 
     @Override

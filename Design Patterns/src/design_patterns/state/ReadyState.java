@@ -2,23 +2,30 @@ package design_patterns.state;
 
 public class ReadyState extends State{
 
-    @Override
-    public String onLock() {
-        return null;
+    public ReadyState(Player player) {
+        super(player);
     }
 
     @Override
-    public String onPLay() {
-        return null;
+    public String onLock() {
+        player.changeState(new LockedState(player));
+        return "Locked...";
+    }
+
+    @Override
+    public String onPlay() {
+        String action = player.startPlayback();
+        player.changeState(new PlayingState(player));
+        return action;
     }
 
     @Override
     public String onNext() {
-        return null;
+        return "Locked...";
     }
 
     @Override
     public String onPrevious() {
-        return null;
+        return "Locked...";
     }
 }
